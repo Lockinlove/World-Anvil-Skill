@@ -20,15 +20,10 @@ your explicit confirmation in chat.
 3. Download this repo as a ZIP (no git needed):
    - On the [repo page](https://github.com/Lockinlove/World-Anvil-Skill),
      click the green **Code** button → **Download ZIP**.
-   - Extract it — this creates a folder named `World-Anvil-Skill-main`.
-   - Rename that extracted folder to `world-anvil-skill` (Claude's uploader
-     requires the ZIP's top-level folder name to match `SKILL.md`'s `name:`
-     field exactly, which is `world-anvil-skill`).
-   - Re-zip the renamed `world-anvil-skill/` folder (so the new ZIP's
-     top-level entry is `world-anvil-skill/`, containing `SKILL.md`,
-     `scripts/`, `reference/`, etc. directly inside it).
+   - No need to rename or repackage anything — upload the downloaded ZIP
+     as-is.
 4. In Claude, go to `Customize > Skills` → click **+** → **+ Create skill**
-   → **Upload a skill** → select your re-zipped file.
+   → **Upload a skill** → select the downloaded ZIP.
 5. Toggle the skill on. It's private to your account by default.
 6. In a chat, ask it to set up the World Anvil skill. It will ask for the
    application key and auth token, then store them (along with your
