@@ -18,13 +18,17 @@ your explicit confirmation in chat.
    - Team/Enterprise: an org owner must enable **Code execution and file
      creation** and **Skills** in `Organization settings > Skills` first.
 3. Package this skill as a ZIP:
-   - Claude's skill uploader requires the top-level folder name inside the
-     ZIP to match the skill's name (from `SKILL.md`'s `name:` field,
-     `worldanvil-article-creator`) — not necessarily this repo's folder name.
-   - Rename (or copy) this project's folder to `worldanvil-article-creator`,
-     then zip that folder (so the ZIP contains a single top-level
-     `worldanvil-article-creator/` folder with `SKILL.md`, `scripts/`,
-     `reference/`, etc. inside it).
+   - Clone/download this repo as `worldanvil-claude-skill` (that name must
+     match `SKILL.md`'s `name:` field, `worldanvil-claude-skill` — Claude's
+     uploader requires the ZIP's top-level folder name to match it).
+     Renaming this repo's default clone folder if your tool names it
+     something else, e.g.:
+     ```
+     git clone https://github.com/Lockinlove/WorldAnvil-Claude-skill.git worldanvil-claude-skill
+     ```
+   - Zip that `worldanvil-claude-skill/` folder (so the ZIP contains a
+     single top-level `worldanvil-claude-skill/` folder with `SKILL.md`,
+     `scripts/`, `reference/`, etc. inside it).
 4. In Claude, go to `Customize > Skills` → click **+** → **+ Create skill**
    → **Upload a skill** → select the ZIP.
 5. Toggle the skill on. It's private to your account by default.

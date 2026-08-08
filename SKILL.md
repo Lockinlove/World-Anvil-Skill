@@ -1,5 +1,5 @@
 ---
-name: worldanvil-article-creator
+name: worldanvil-claude-skill
 description: Use when the user has agreed on an idea for a new World Anvil article and wants it drafted, formatted, and published to their World Anvil world via the Boromir API.
 ---
 
