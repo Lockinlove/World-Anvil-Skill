@@ -39,3 +39,8 @@ your explicit confirmation in chat.
 pip install -r requirements-dev.txt
 pytest tests/ -v
 ```
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
