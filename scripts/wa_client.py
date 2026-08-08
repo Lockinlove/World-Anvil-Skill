@@ -134,3 +134,16 @@ def create_article(creds: Dict[str, str], payload: Dict[str, Any]) -> Dict[str, 
 
 def patch_article(creds: Dict[str, str], article_id: str, fields: Dict[str, Any]) -> Dict[str, Any]:
     return _patch("article", creds, article_id, fields)
+
+
+def get_article(creds: Dict[str, str], article_id: str) -> Dict[str, Any]:
+    """Fetch one article's full detail (granularity 1 = principal display
+    object, includes content — not just an id/title/url reference)."""
+    return _get("article", creds, {"id": article_id, "granularity": 1})
+
+
+def get_category_articles(creds: Dict[str, str], category_id: str) -> Dict[str, Any]:
+    """Fetch one category's detail (granularity 2 = detailed object with
+    linking data). Returns the raw response body; callers pull out the
+    linked-articles list from whatever key the API actually uses."""
+    return _get("category", creds, {"id": category_id, "granularity": 2})

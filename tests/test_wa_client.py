@@ -117,3 +117,36 @@ def test_list_articles_paginates(mock_post):
     ]
     articles = wa_client.list_articles(CREDS)
     assert articles == [{"id": "a1", "title": "Foo"}]
+
+
+@patch("scripts.wa_client.requests.get")
+def test_get_article_returns_body(mock_get):
+    mock_get.return_value = _mock_response(200, {
+        "success": True, "id": "a1", "title": "Session 12 Recap",
+        "content": "Full markdown body", "templateType": "report",
+    })
+    result = wa_client.get_article(CREDS, "a1")
+    assert result["id"] == "a1"
+    assert result["content"] == "Full markdown body"
+    sent_params = mock_get.call_args.kwargs["params"]
+    assert sent_params == {"id": "a1", "granularity": 1}
+
+
+@patch("scripts.wa_client.requests.get")
+def test_get_article_not_found_raises(mock_get):
+    mock_get.return_value = _mock_response(404, {"success": False, "error": "Not found"})
+    with pytest.raises(wa_client.WAApiError) as exc_info:
+        wa_client.get_article(CREDS, "does-not-exist")
+    assert exc_info.value.status_code == 404
+
+
+@patch("scripts.wa_client.requests.get")
+def test_get_category_articles_returns_body(mock_get):
+    mock_get.return_value = _mock_response(200, {
+        "success": True, "id": "c1", "title": "NPCs",
+        "articles": [{"id": "a1", "title": "Ármen", "url": "https://x/a1"}],
+    })
+    result = wa_client.get_category_articles(CREDS, "c1")
+    assert result["articles"] == [{"id": "a1", "title": "Ármen", "url": "https://x/a1"}]
+    sent_params = mock_get.call_args.kwargs["params"]
+    assert sent_params == {"id": "c1", "granularity": 2}
