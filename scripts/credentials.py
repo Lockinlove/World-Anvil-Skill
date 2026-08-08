@@ -47,14 +47,20 @@ def _restrict_permissions(path: Path) -> None:
         os.chmod(path, stat.S_IRUSR | stat.S_IWUSR)  # 0o600
 
 
+REQUIRED_KEYS = ("application_key", "auth_token", "world_id")
+
+
 def load_credentials() -> Optional[Dict[str, str]]:
     if not CRED_FILE.exists():
         return None
     try:
         with open(CRED_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
+            data = json.load(f)
     except (json.JSONDecodeError, OSError):
         return None
+    if not isinstance(data, dict) or not all(key in data for key in REQUIRED_KEYS):
+        return None
+    return data
 
 
 def save_credentials(
