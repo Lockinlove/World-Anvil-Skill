@@ -37,6 +37,8 @@ SCRIPTS_AND_PAYLOADS = [
     ("scripts.search_entities", {"names": ["Anything"]}),
     ("scripts.create_article", {"title": "T", "content": "C", "templateType": "article"}),
     ("scripts.publish_article", {"article_id": "does-not-matter"}),
+    ("scripts.get_article", {"id": "does-not-matter"}),
+    ("scripts.list_category_articles", {"category": "Anything"}),
 ]
 
 
