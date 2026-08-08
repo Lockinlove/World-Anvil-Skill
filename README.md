@@ -6,18 +6,38 @@ your explicit confirmation in chat.
 
 ## Setup
 
-1. Install Python 3.10+.
-2. `pip install -r requirements.txt`
-3. Get your World Anvil credentials:
+1. Get your World Anvil credentials:
    - Application key: request one at the WA API access form (see World Anvil's
      API documentation).
    - Auth token: generate one at https://www.worldanvil.com/api/auth/key
    - World ID: the skill can look this up by world name once you give it
      your application key and auth token (see `scripts/save_credentials.py`).
-4. In your Claude chat, ask it to set up the World Anvil skill. It will ask
-   for the application key and auth token, then store them (along with your
-   resolved world ID) in `~/.worldanvil-skill/credentials.json` on your
-   machine. You will not need to provide them again in future chats.
+2. Enable Skills in Claude:
+   - Free/Pro/Max: `Settings > Capabilities` → turn on **Code execution and
+     file creation** (Skills requires this — it won't appear otherwise).
+   - Team/Enterprise: an org owner must enable **Code execution and file
+     creation** and **Skills** in `Organization settings > Skills` first.
+3. Package this skill as a ZIP:
+   - Claude's skill uploader requires the top-level folder name inside the
+     ZIP to match the skill's name (from `SKILL.md`'s `name:` field,
+     `worldanvil-article-creator`) — not necessarily this repo's folder name.
+   - Rename (or copy) this project's folder to `worldanvil-article-creator`,
+     then zip that folder (so the ZIP contains a single top-level
+     `worldanvil-article-creator/` folder with `SKILL.md`, `scripts/`,
+     `reference/`, etc. inside it).
+4. In Claude, go to `Customize > Skills` → click **+** → **+ Create skill**
+   → **Upload a skill** → select the ZIP.
+5. Toggle the skill on. It's private to your account by default.
+6. In a chat, ask it to set up the World Anvil skill. It will ask for the
+   application key and auth token, then store them (along with your
+   resolved world ID) in `~/.worldanvil-skill/credentials.json` on the
+   machine running the code-execution environment. You will not need to
+   provide them again in future chats from that same environment.
+
+Note: `requirements.txt` (`requests`) needs to be installed in whatever
+Python environment the code-execution sandbox uses to run this skill's
+scripts — if Claude reports it can't `import requests`, ask it to install
+the dependency in that environment first.
 
 ## What it does
 
