@@ -19,6 +19,7 @@ def test_resolve_by_world_name_success(mock_identity, mock_worlds, mock_save):
     )
     assert result["success"] is True
     assert result["world_id"] == "w1"
+    assert "persistence_note" in result
     mock_save.assert_called_once_with("app", "tok", "w1", world_title="Alarkdum")
 
 
@@ -43,6 +44,7 @@ def test_resolve_by_world_id_skips_lookup(mock_identity, mock_save):
     )
     assert result["success"] is True
     assert result["world_id"] == "w1"
+    assert "persistence_note" in result
     mock_save.assert_called_once_with("app", "tok", "w1", world_title=None)
 
 

@@ -51,7 +51,12 @@ def resolve_and_save(
     credentials.save_credentials(
         application_key, auth_token, resolved_world_id, world_title=resolved_world_title
     )
-    return {"success": True, "world_id": resolved_world_id, "world_title": resolved_world_title}
+    return {
+        "success": True,
+        "world_id": resolved_world_id,
+        "world_title": resolved_world_title,
+        "persistence_note": credentials.PERSISTENCE_NOTE,
+    }
 
 
 def main() -> None:

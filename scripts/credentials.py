@@ -3,6 +3,20 @@
 Stored outside the skill package directory (in the user's home folder) so
 reinstalling/updating the skill never wipes stored credentials. File
 permissions are locked down to the current user where the OS supports it.
+
+Whether this file actually persists across chats depends on where the code
+executing it lives:
+
+- Claude Code on your own computer: `~` is a real, persistent home
+  directory, so this survives restarts and future sessions.
+- claude.ai web/mobile chat: each conversation runs in a fresh, disposable
+  sandbox with no persistent disk. This file is created, used for the rest
+  of that one chat, then destroyed with the sandbox — it will NOT be there
+  next session, no matter how it's stored.
+
+Callers (see save_credentials.py) must not assume persistence and should
+surface PERSISTENCE_NOTE to the user rather than silently claiming
+credentials are saved "for future chats."
 """
 import json
 import logging
@@ -48,6 +62,19 @@ def _restrict_permissions(path: Path) -> None:
 
 
 REQUIRED_KEYS = ("application_key", "auth_token", "world_id")
+
+PERSISTENCE_NOTE = (
+    "Credentials were saved to ~/.worldanvil-skill/credentials.json on the "
+    "machine currently running this code. This persists across future "
+    "chats ONLY if that machine is your own computer (e.g. Claude Code). "
+    "If this is claude.ai web/mobile chat, this session's sandbox is "
+    "disposable and these credentials will be gone next chat -- you'll be "
+    "asked for them again. The only way to avoid re-entering them there is "
+    "pasting them into Project Knowledge, which stores them in plaintext on "
+    "Anthropic's servers, visible to anyone with access to that project, "
+    "with no built-in expiry -- a convenience/security tradeoff, not "
+    "something this skill does for you automatically."
+)
 
 
 def load_credentials() -> Optional[Dict[str, str]]:

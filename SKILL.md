@@ -40,8 +40,15 @@ anything:
 4. If it returns `"success": false` with `available_worlds`, show that list
    to the user and ask them to pick the correct one, then retry with
    `world_name` set to the exact title (or pass `world_id` directly).
-5. Once successful, credentials are stored in `~/.worldanvil-skill/` and this
-   step is skipped in all future conversations.
+5. Once successful, credentials are stored in `~/.worldanvil-skill/` on
+   whatever machine is actually running this code. The result JSON includes
+   a `persistence_note` field — **relay it to the user, in your own words
+   or verbatim, right after the first successful save.** Do not guess or
+   assert on your own whether credentials will survive to the next
+   session; the note exists precisely because that depends on an
+   environment this skill can't detect from inside a script, and past
+   behavior of silently assuming "you won't need to provide them again"
+   was wrong for claude.ai web/mobile chat.
 
 ## 0.5. Gather context before drafting (optional, read-only)
 
