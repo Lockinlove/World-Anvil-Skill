@@ -1,6 +1,6 @@
 ---
-name: worldanvil-claude-skill
-description: Use when the user has agreed on an idea for a new World Anvil article and wants it drafted, formatted, and published to their World Anvil world via the Boromir API.
+name: world-anvil-skill
+description: A Claude Skill for use with Claude - drafts, formats, and publishes World Anvil articles via the Boromir API. Use when the user has agreed on an idea for a new World Anvil article and wants it drafted, formatted, and published to their World Anvil world.
 ---
 
 # World Anvil Article Creator

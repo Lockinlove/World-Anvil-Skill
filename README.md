@@ -17,20 +17,18 @@ your explicit confirmation in chat.
      file creation** (Skills requires this — it won't appear otherwise).
    - Team/Enterprise: an org owner must enable **Code execution and file
      creation** and **Skills** in `Organization settings > Skills` first.
-3. Package this skill as a ZIP:
-   - Clone/download this repo as `worldanvil-claude-skill` (that name must
-     match `SKILL.md`'s `name:` field, `worldanvil-claude-skill` — Claude's
-     uploader requires the ZIP's top-level folder name to match it).
-     Renaming this repo's default clone folder if your tool names it
-     something else, e.g.:
-     ```
-     git clone https://github.com/Lockinlove/WorldAnvil-Claude-skill.git worldanvil-claude-skill
-     ```
-   - Zip that `worldanvil-claude-skill/` folder (so the ZIP contains a
-     single top-level `worldanvil-claude-skill/` folder with `SKILL.md`,
-     `scripts/`, `reference/`, etc. inside it).
+3. Download this repo as a ZIP (no git needed):
+   - On the [repo page](https://github.com/Lockinlove/World-Anvil-Skill),
+     click the green **Code** button → **Download ZIP**.
+   - Extract it — this creates a folder named `World-Anvil-Skill-main`.
+   - Rename that extracted folder to `world-anvil-skill` (Claude's uploader
+     requires the ZIP's top-level folder name to match `SKILL.md`'s `name:`
+     field exactly, which is `world-anvil-skill`).
+   - Re-zip the renamed `world-anvil-skill/` folder (so the new ZIP's
+     top-level entry is `world-anvil-skill/`, containing `SKILL.md`,
+     `scripts/`, `reference/`, etc. directly inside it).
 4. In Claude, go to `Customize > Skills` → click **+** → **+ Create skill**
-   → **Upload a skill** → select the ZIP.
+   → **Upload a skill** → select your re-zipped file.
 5. Toggle the skill on. It's private to your account by default.
 6. In a chat, ask it to set up the World Anvil skill. It will ask for the
    application key and auth token, then store them (along with your
