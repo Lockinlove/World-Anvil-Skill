@@ -66,8 +66,12 @@ or
 {"success": false, "error": "..."}
 ```
 If a `title` lookup finds no reasonable match, returns
-`{"success": false, "error": "no match found", "closest": {...} or null}` —
-mirrors the `match: null` convention already used by `list_categories.py`.
+`{"success": false, "error": "No article matches '<title>'."}`. This is a
+harder failure than `list_categories.py`'s `match: null` convention
+(rather than surfacing "no match" as a still-successful result for the
+caller to branch on) because fetching a specific article by title is
+already a terminal lookup, not a step in a larger resolve-then-confirm
+flow — there's nothing further to do with a no-match here except report it.
 
 ## `scripts/list_category_articles.py`
 
@@ -88,8 +92,11 @@ or
 ```json
 {"success": false, "error": "..."}
 ```
-(including "no category match" when the fuzzy match on `category` fails,
-same convention as `list_categories.py`'s existing category resolution.)
+(including "no category match" when the fuzzy match on `category` fails —
+a hard failure, since resolving a category to fetch its articles is a
+terminal lookup here, not a step where a null match is itself a useful
+result to hand back to the caller, the way `list_categories.py`'s
+`match: null` is for its own resolve-then-confirm flow).
 
 ## SKILL.md changes
 
