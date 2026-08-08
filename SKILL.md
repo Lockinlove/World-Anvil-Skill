@@ -43,6 +43,29 @@ anything:
 5. Once successful, credentials are stored in `~/.worldanvil-skill/` and this
    step is skipped in all future conversations.
 
+## 0.5. Gather context before drafting (optional, read-only)
+
+When the user references existing material in conversation — "like the
+last recap", "what we planned last session", "the NPC's existing bio" —
+pull that content in before drafting, so the new article stays consistent
+with what already exists. This is read-only: no confirmation gate needed,
+since nothing is written to World Anvil.
+
+1. Call `python -m scripts.list_category_articles` with
+   `{"category": "<the category the user implies or states>"}` to get the
+   stub list (id/title/url) of articles in that category.
+2. From the returned stubs, identify the right article by title yourself
+   (same kind of judgment call as the entity-linking pass in step 3).
+3. Call `python -m scripts.get_article` with `{"id": "<id from step 2>"}`
+   (or `{"title": "...", "category": "..."}` to skip straight to a fuzzy
+   title match within that category) to pull the full content.
+4. Use that content as context for the new draft — quote from it, match
+   its tone/structure, or reference it directly, as appropriate to what
+   the user asked for.
+
+This is separate from the mandatory drafting/confirmation flow below —
+gathering context never itself writes anything to World Anvil.
+
 ## 1. Pick a `templateType`
 
 Read `reference/template-types.md` and pick the best-fitting `templateType`
